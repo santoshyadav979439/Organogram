@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { open } from '../../slices/popup/popupSlice';
 import AddEmp from '../organisms/Forms/AddEmp';
 import BasicModal from '../molecules/Modal';
+
 const Row = ({
   id,
   name,
@@ -13,12 +14,22 @@ const Row = ({
   direct,
   total,
   projects,
+  rowClickHandler,
 }) => {
+  const [isExpanded, setIsExpended] = useState(false);
   const dispatch = useDispatch();
   const modify = useSelector((state) => state.modify.value);
+  const onClickHandler = () => {
+    setIsExpended(!isExpanded);
+    rowClickHandler(id);
+  };
   return (
     <>
-      <tr id={id} className='l1 expanded'>
+      <tr
+        id={id}
+        className={isExpanded ? 'l1 expanded' : 'l1'}
+        onClick={onClickHandler}
+      >
         <td className='etree'>
           <span className='node'>
             <span className='expcoll'></span>
@@ -27,7 +38,9 @@ const Row = ({
 
           <div
             className='axns'
-            style={!modify ? { visibility: 'none' } : { visibility: 'visible' }}
+            style={
+              !modify ? { visibility: 'hidden' } : { visibility: 'visible' }
+            }
           >
             <button className='axn edite'>✎</button>
             <button className='axn movee'>✥</button>
