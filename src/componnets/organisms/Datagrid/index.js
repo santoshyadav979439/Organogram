@@ -2,12 +2,12 @@ import React, { useEffect, useState } from 'react';
 import './style.css';
 import Caption from '../Caption';
 import Thead from '../../molecules/thead';
-import Row from '../../atoms/Row';
 import { rawData } from './data';
 import axios from '../../../axios';
+import RowList from '../RowList';
 const DataGrid = () => {
   const [empData, setEmpData] = useState(rawData.details);
-/*   useEffect(() => {
+  /*   useEffect(() => {
     axios.get('all.json').then((res) => {
       let data = res.data;
 
@@ -16,6 +16,9 @@ const DataGrid = () => {
       console.log(details);
     });
   }, []); */
+  const rowClickHandler = (id) => {
+
+  };
   return (
     <div className='dataGrid'>
       <table id='organogram' style={{ display: 'table' }}>
@@ -23,7 +26,7 @@ const DataGrid = () => {
         <Thead />
         <tbody>
           {empData.map((el) => {
-            return <Row {...el} />;
+            return <RowList {...el} />;
           })}
         </tbody>
       </table>
