@@ -54,19 +54,6 @@ const AddEmp = ({
     }
   }, []);
 
-  console.log({
-    id,
-    name,
-    designation,
-    level,
-    adminManager,
-    functionalManager,
-    direct,
-    total,
-    projects,
-    isEdit,
-  });
-
   const handleCheckbox = (e) => {
     console.log(e.target.dataset.label);
     setProjectsObj((prevData) => {
