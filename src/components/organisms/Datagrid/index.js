@@ -6,16 +6,16 @@ import { rawData } from "./data";
 import axios from "../../../axios";
 import RowList from "../RowList";
 const DataGrid = () => {
-  const [empData, setEmpData] = useState(rawData.details);
-  /*   useEffect(() => {
-    axios.get('all.json').then((res) => {
+  const [empData, setEmpData] = useState([]);
+  useEffect(() => {
+    axios.get('getHiearachy/admin').then((res) => {
       let data = res.data;
 
-      console.log(data)
-      const { details } = data;
-      console.log(details);
+      console.log(data);
+      const { detail } = data;
+      setEmpData(detail);
     });
-  }, []); */
+  }, []);
   const rowClickHandler = (id) => {};
   const radioButtonClickHandler = (param) => {
     console.log(`${param} is clicked`);

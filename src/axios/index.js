@@ -1,6 +1,5 @@
-import axios from 'axios'
+import axios from 'axios';
 const instance = axios.create({
-  baseURL:
-    'https://organogram-17c0e-default-rtdb.asia-southeast1.firebasedatabase.app/',
+  baseURL: 'http://localhost:8096/organogram/v1/',
 });
 export default instance;
