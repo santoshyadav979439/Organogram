@@ -27,7 +27,9 @@ const Row = ({
 
           <div
             className='axns'
-            style={!modify ? { visibility: 'none' } : { visibility: 'visible' }}
+            style={
+              !modify ? { visibility: 'hidden' } : { visibility: 'visible' }
+            }
           >
             <button className='axn edite'>✎</button>
             <button className='axn movee'>✥</button>
