@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import './style.css';
-import Caption from '../Caption';
-import Thead from '../../molecules/thead';
-import { rawData } from './data';
-import axios from '../../../axios';
-import RowList from '../RowList';
+import React, { useEffect, useState } from "react";
+import "./style.css";
+import Caption from "../Caption";
+import Thead from "../../molecules/thead";
+import { rawData } from "./data";
+import axios from "../../../axios";
+import RowList from "../RowList";
 const DataGrid = () => {
   const [empData, setEmpData] = useState(rawData.details);
   /*   useEffect(() => {
@@ -21,13 +21,13 @@ const DataGrid = () => {
     console.log(`${param} is clicked`);
   };
   return (
-    <div className='dataGrid'>
-      <table id='organogram' style={{ display: 'table' }}>
+    <div className="dataGrid">
+      <table id="organogram" style={{ display: "table" }}>
         <Caption radioButtonClickHandler={radioButtonClickHandler} />
         <Thead />
         <tbody>
           {empData.map((el) => {
-            return <RowList {...el} />;
+            return <RowList key={el.id} {...el} />;
           })}
         </tbody>
       </table>
