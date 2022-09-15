@@ -16,13 +16,14 @@ const DataGrid = () => {
       console.log(details);
     });
   }, []); */
-  const rowClickHandler = (id) => {
-
+  const rowClickHandler = (id) => {};
+  const radioButtonClickHandler = (param) => {
+    console.log(`${param} is clicked`);
   };
   return (
     <div className='dataGrid'>
       <table id='organogram' style={{ display: 'table' }}>
-        <Caption />
+        <Caption radioButtonClickHandler={radioButtonClickHandler} />
         <Thead />
         <tbody>
           {empData.map((el) => {

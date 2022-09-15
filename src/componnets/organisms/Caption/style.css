@@ -1,0 +1,13 @@
+.caption-right-action {
+  display: flex;
+  grid-gap: 5px;
+}
+.caption-right-action input {
+  display: block;
+  cursor: pointer;
+}
+.caption-right-action button {
+  display: block;
+  cursor: pointer;
+}
+

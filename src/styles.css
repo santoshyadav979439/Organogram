@@ -1,143 +1,156 @@
 @charset "ISO-8859-1";
 
 body {
-	max-width: 100%;
+  max-width: 100%;
 }
 
 #organogram {
-	border-collapse: collapse;
-	font-family: "Arial Narrow", Arial, sans-serif;
-	font-size: 9pt;
-	border: 2px solid #f3f3f3;
-	width: 100%;
-	min-width: 1001px;
-	display:none;
+  border-collapse: collapse;
+  font-family: 'Arial Narrow', Arial, sans-serif;
+  font-size: 9pt;
+  border: 2px solid #f3f3f3;
+  width: 100%;
+  min-width: 1001px;
+  display: none;
 }
 
-#organogram>tbody>tr:nth-child(even) {
-	background: rgba(230,230,230,0.5); /*#f3f3f3*/
+#organogram > tbody > tr:nth-child(even) {
+  background: rgba(230, 230, 230, 0.5); /*#f3f3f3*/
 }
 
-#organogram>tbody>tr:hover {
-	 background: #e5f3ff;
-	/*background: rgba(229, 243, 255, 0.8);
+#organogram > tbody > tr:hover {
+  background: #e5f3ff;
+  /*background: rgba(229, 243, 255, 0.8);
 	background: rgba(219, 233, 255, 0.7);*/
 }
 
 #organogram th {
-	position: sticky;
-	top: 0;
-	background-color: #000;
-	color: #fff;
-	border: 1px solid #f3f3f3;
-	text-align: left;
-	z-index: 100;
+  position: sticky;
+  top: 0;
+  background-color: #00b4d8;
+  color: #fff;
+  border: 1px solid #f3f3f3;
+  text-align: left;
+  z-index: 100;
 }
 
 #colgrpetree {
-	min-width: 300px;
-	max-width: 300px;
-	width: 300px;
-	border-right: 4px double #f3f3f3;
+  min-width: 300px;
+  max-width: 300px;
+  width: 300px;
+  border-right: 4px double #f3f3f3;
 }
 
-.expcoll, .node {
-	cursor: pointer;
+.expcoll,
+.node {
+  cursor: pointer;
 }
 
-.node:hover, .node:hover .expcoll::before {
-	color: blue;
+.node:hover,
+.node:hover .expcoll::before {
+  color: blue;
 }
 
 .node {
-	overflow: hidden;
-	white-space: nowrap;
-	max-width: 105px;
-	text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  max-width: 105px;
+  text-overflow: ellipsis;
 }
 
 .expcoll::before {
-	content: "\276f"; /*203a*/
-	color: #888;
-	display: inline-block;
-	width: 12pt;
-	text-align: center;
+  content: '\276f'; /*203a*/
+  color: #888;
+  display: inline-block;
+  width: 12pt;
+  text-align: center;
 }
 .expanded .expcoll::before {
-	transform: rotate(90deg);
+  transform: rotate(90deg);
 }
 
 .noso .expcoll {
-	cursor: default;
+  cursor: default;
 }
 
 .noso .expcoll::before {
-	content: "\a0";
+  content: '\a0';
 }
 
 .l2 .node {
-	padding-left: 12px;
+  padding-left: 12px;
 }
 .l3 .node {
-	padding-left: 24px;
+  padding-left: 24px;
 }
 .l4 .node {
-	padding-left: 36px;
+  padding-left: 36px;
 }
 .l5 .node {
-	padding-left: 48px;
+  padding-left: 48px;
 }
 .l6 .node {
-	padding-left: 60px;
+  padding-left: 60px;
 }
 .l7 .node {
-	padding-left: 72px;
+  padding-left: 72px;
 }
 #coletree {
-	min-width: 300px;
-	transition: 1s;
+  min-width: 300px;
+  transition: 1s;
 }
 
 #organogram td {
-	text-overflow: ellipsis;
-	overflow: hidden;
-	white-space: nowrap;
-	max-width: 120px;
-	position: relative;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  max-width: 120px;
+  position: relative;
 }
 
-#coleid, #colelevel, #coledreports, #coletreports {
-	width: 45pt;
+#coleid,
+#colelevel,
+#coledreports,
+#coletreports {
+  width: 45pt;
 }
 
-#colename, #coleadminman, #colefuncman {
-	width: 105pt;
+#colename,
+#coleadminman,
+#colefuncman {
+  width: 105pt;
 }
 
 #coledesig {
-	width: 120pt;
+  width: 120pt;
 }
 
-.elevel, #organogram th.elevel, .edreports, #organogram th.edreports,
-	.etreports, #organogram th.etreports, .eid, #organogram th.eid {
-	text-align: center;
+.elevel,
+#organogram th.elevel,
+.edreports,
+#organogram th.edreports,
+.etreports,
+#organogram th.etreports,
+.eid,
+#organogram th.eid {
+  text-align: center;
 }
 
 #organogram tr {
-	transition: 0.05s;
-	opacity: 1;
-	line-height: 18pt;
-	visibility: visible;
+  transition: 0.05s;
+  opacity: 1;
+  line-height: 18pt;
+  visibility: visible;
 }
 
 #organogram tr.parent-collapsed {
-	visibility: collapse;
-	opacity: 0;
-	line-height: 0;
+  visibility: collapse;
+  opacity: 0;
+  line-height: 0;
 }
 
-table>caption {
-	font-size: 24pt;
+table > caption {
+  font-size: 24pt;
 }
 
 /*
@@ -159,151 +172,157 @@ table>caption {
 /*************************************/
 /* The Modal (background) */
 .modal {
-	display: none; /* Hidden by default */
-	position: fixed; /* Stay in place */
-	z-index: 1; /* Sit on top */
-	padding-top: 100px; /* Location of the box */
-	left: 0;
-	top: 0;
-	width: 100%; /* Full width */
-	height: 100%; /* Full height */
-	overflow: auto; /* Enable scroll if needed */
-	background-color: rgb(0, 0, 0); /* Fallback color */
-	background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
 }
 
 /* Modal Content */
 .modal-content {
-	background-color: #fefefe;
-	margin: auto;
-	padding: 20px;
-	border: 1px solid #888;
-	width: 400pt;
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 400pt;
 }
 
 /* The Close Button */
 .close {
-	color: #aaaaaa;
-	float: right;
-	font-size: 28px;
-	font-weight: bold;
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
 }
 
-.close:hover, .close:focus {
-	color: #000;
-	text-decoration: none;
-	cursor: pointer;
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
 }
-#newfields label{
-	width: 120pt;
-	display: inline-block;
-	text-align: right;
-	vertical-align: top;
+#newfields label {
+  width: 120pt;
+  display: inline-block;
+  text-align: right;
+  vertical-align: top;
 }
-#newfields input, #newfields input{
-	width: 180pt;
-	display: inline-block;
+#newfields input,
+#newfields input {
+  width: 180pt;
+  display: inline-block;
 }
-#newfields #projects input{
-	text-align: left;
-	width: auto;
+#newfields #projects input {
+  text-align: left;
+  width: auto;
 }
-#newfields #projects label{
-	text-align: left;
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	max-width: calc(100% - 11px);
+#newfields #projects label {
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: calc(100% - 11px);
 }
-#projects{
-	columns: 4;
+#projects {
+  columns: 4;
 }
-#projects>p{
-	margin:0;
-	white-space: nowrap;
-	overflow: hidden;
+#projects > p {
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
 }
-.axns{
-	position:absolute;
-	right:0;
-	top:0;
-	bottom:0;
-	display: none;
+.axns {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  display: none;
 }
-.axns>button{
-	cursor: pointer;
-	vertical-align: middle;
-	width: 18pt;
-	height: 18pt;
-	padding: 0;
-	text-align: center;
+.axns > button {
+  cursor: pointer;
+  vertical-align: middle;
+  width: 18pt;
+  height: 18pt;
+  padding: 0;
+  text-align: center;
 }
 #organogram td.etree:hover .axns {
-	display: block;
+  display: block;
 }
-#modify{
-	visibility: hidden;
-	cursor: pointer;
-	width: 48pt;
-	text-align: center;
+#modify {
+  visibility: hidden;
+  cursor: pointer;
+  width: 48pt;
+  text-align: center;
 }
-#modify:after{
-	content: attr(data-off);
-	visibility: visible;
-	background: #ededed;
-	border: 1px solid #ccc;
-	padding: 2px 6px;
-	border-radius: 1px;
+#modify:after {
+  content: attr(data-off);
+  visibility: visible;
+  background: #ededed;
+  border: 1px solid #ccc;
+  padding: 2px 6px;
+  border-radius: 1px;
 }
-#modify:checked:after{
-	content: attr(data-on);
-	background: #e5e5e5;
-	box-shadow: inset 0px 0px 5px #c1c1c1;
-	outline: none;
-	color: blue;
+#modify:checked:after {
+  content: attr(data-on);
+  background: #e5e5e5;
+  box-shadow: inset 0px 0px 5px #c1c1c1;
+  outline: none;
+  color: blue;
 }
-#header-left{
-	float:left;
+#header-left {
+  float: left;
 }
-#header-right{
-	float:right;
+#header-right {
+  float: right;
 }
-table>caption>span{
-	font-size: 12pt;
-	vertical-align: top;
-	height: 24pt;
-	line-height: 24pt;
+table > caption > span {
+  font-size: 12pt;
+  vertical-align: top;
+  height: 24pt;
+  line-height: 24pt;
 }
-#coleid{
-	text-align: center;
+#coleid {
+  text-align: center;
 }
-#addnewp{
-	text-align: center;
+#addnewp {
+  text-align: center;
 }
-#coletree.modifying{
-	background-color: #ffffe0;
+#coletree.modifying {
+  background-color: #ffffe0;
 }
-.filterbtn{
-	
+.filterbtn {
 }
 
-.filterbtn{
-	visibility: hidden;
-	cursor: pointer;
-	margin:0;
-	font-size: 12pt;
-	color: #999;
-	vertical-align: top;
+.filterbtn {
+  visibility: hidden;
+  cursor: pointer;
+  margin: 0;
+  font-size: 12pt;
+  color: #999;
+  vertical-align: top;
 }
-.filterbtn:after{
-	content: "\2b18";/*\23da*/
-	visibility: visible;
-	padding: 0 2pt;
+.filterbtn:after {
+  content: '\2b18'; /*\23da*/
+  visibility: visible;
+  padding: 0 2pt;
 }
-.filterbtn:checked:after{
-	content: "\2b19";
-	color:yellow;
+.filterbtn:checked:after {
+  content: '\2b19';
+  color: yellow;
 }
-#organogram>tbody>tr.tbr{
-	font-style: italic;
+#organogram > tbody > tr.tbr {
+  font-style: italic;
+}
+
+.top-heading {
+  text-align: center;
+  color: #00b4d8;
 }

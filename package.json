@@ -14,7 +14,9 @@
     "react-dom": "18.2.0",
     "react-redux": "^8.0.2",
     "react-scripts": "4.0.0",
-    "xlsx": "^0.18.5"
+    "xlsx": "^0.18.5",
+    "@mdi/js": "^5.9.55",
+    "@mdi/react": "^1.4.0"
   },
   "devDependencies": {
     "@babel/runtime": "7.13.8",

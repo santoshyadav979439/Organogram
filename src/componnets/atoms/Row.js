@@ -42,6 +42,7 @@ const Row = ({
               !modify ? { visibility: 'hidden' } : { visibility: 'visible' }
             }
           >
+           
             <button className='axn edite'>✎</button>
             <button className='axn movee'>✥</button>
             <button className='axn deletee'>🗑</button>
