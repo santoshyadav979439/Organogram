@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { open } from "../../slices/popup/popupSlice";
 import { AddEmp } from "../organisms/Forms";
 import BasicModal from "../molecules/Modal";
+import { modify, add, deleteEmp } from "../../slices/employee/employeeSlice";
+import axios from "../../axios";
 
 const Row = ({
   id,
@@ -17,8 +19,11 @@ const Row = ({
   rowClickHandler,
 }) => {
   const [isExpanded, setIsExpended] = useState(false);
+  const [isEdit, setIsEdit] = useState(false);
   const dispatch = useDispatch();
   const modify = useSelector((state) => state.modify.value);
+  const employee = useSelector((state) => state.employeeSlice.empData);
+
   const onClickHandler = () => {
     setIsExpended(!isExpanded);
     rowClickHandler(id);
@@ -42,10 +47,24 @@ const Row = ({
               !modify ? { visibility: "hidden" } : { visibility: "visible" }
             }
           >
-            <button className="axn edite">✎</button>
+            <button
+              onClick={() => {
+                setIsEdit(true);
+                dispatch(open());
+              }}
+              className="axn edite"
+            >
+              ✎
+            </button>
             <button className="axn movee">✥</button>
             <button className="axn deletee">🗑</button>
-            <button onClick={() => dispatch(open())} className="axn addso">
+            <button
+              onClick={() => {
+                setIsEdit(false);
+                dispatch(open());
+              }}
+              className="axn addso"
+            >
               +
             </button>
           </div>
@@ -62,7 +81,7 @@ const Row = ({
       </tr>
       <BasicModal>
         <AddEmp
-          isEdit={false}
+          isEdit={isEdit}
           id={id}
           name={name}
           designation={designation}
@@ -72,7 +91,20 @@ const Row = ({
           direct={direct}
           total={total}
           projects={projects}
-        />{" "}
+          onSubmit={(data) => {
+            if (isEdit) {
+              axios.put("empOperation", data).then((res) => {
+                let data = res.data;
+                console.log(data);
+              });
+            } else {
+              axios.post("empOperation", data).then((res) => {
+                let data = res.data;
+                console.log(data);
+              });
+            }
+          }}
+        />
       </BasicModal>
     </>
   );

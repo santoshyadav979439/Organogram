@@ -2,9 +2,9 @@ export const FIELDS = {
   ID: "id",
   NAME: "name",
   DESIGNATION: "designation",
-  ADMINISTRATIVE_MANAGER: "administrativeManager",
+  ADMINISTRATIVE_MANAGER: "adminManager",
   FUNCTIONAL_MANAGER: "functionalManager",
-  PROJECTS: "projects",
+  PROJECTS: "project",
 };
 
 export const VALIDATION_SCHEMA = {

@@ -1,12 +1,17 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const Select = ({ error, options, valueKey, labelKey, ...props }) => {
+const Select = ({ label, error, options, valueKey, labelKey, ...props }) => {
   return (
     <>
-      <select {...props}>
+      <select {...props} style={{ marginLeft: 10 }}>
+        <option value="">Select {label}</option>
         {options.map((option) => {
-          return <option value={option[valueKey]}>{option[labelKey]}</option>;
+          return (
+            <option value={`${option[valueKey]}`} data-label={option[labelKey]}>
+              {option[labelKey]}
+            </option>
+          );
         })}
       </select>
       {error && <p>{error}</p>}

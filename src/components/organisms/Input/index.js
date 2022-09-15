@@ -4,7 +4,9 @@ import PropTypes from "prop-types";
 const Input = ({ error, label, id, ...props }) => {
   return (
     <>
-      <label htmlFor={id}>{label}</label>
+      <label htmlFor={id} style={{ marginRight: 10 }}>
+        {label}
+      </label>
       <input error={error} label={label} id={id} {...props} />
       {error && <p>{error}</p>}
     </>

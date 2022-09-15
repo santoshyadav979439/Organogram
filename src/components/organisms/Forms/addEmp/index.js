@@ -1,8 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useFormFields, useValidation } from "../../../../hooks";
 import { FIELDS, VALIDATION_SCHEMA } from "./formFields";
 import { Input, Select } from "../../../../components/organisms";
-import { DESIGNATIONS } from "../../../../constants";
+import { DESIGNATIONS, PROJECTS } from "../../../../constants";
+
+const styles = {
+  row: {
+    display: "flex",
+    marginBottom: 10,
+  },
+  button: {
+    width: 120,
+    marginTop: 15,
+    cursor: "pointer",
+  },
+};
 
 const AddEmp = ({
   id,
@@ -14,10 +26,12 @@ const AddEmp = ({
   direct,
   total,
   projects,
+  isEdit,
+  onSubmit,
 }) => {
   const [projectsObj, setProjectsObj] = useState();
 
-  const { formFields, createChangeHandler } = useFormFields({
+  const { formFields, setFormFields, createChangeHandler } = useFormFields({
     [FIELDS.ID]: "",
     [FIELDS.NAME]: "",
   });
@@ -26,6 +40,19 @@ const AddEmp = ({
     validationSchema: VALIDATION_SCHEMA,
     values: formFields,
   });
+
+  useEffect(() => {
+    if (isEdit) {
+      setFormFields({
+        [FIELDS.ID]: id,
+        [FIELDS.NAME]: name,
+        [FIELDS.DESIGNATION]: designation,
+        [FIELDS.ADMINISTRATIVE_MANAGER]: adminManager,
+        [FIELDS.FUNCTIONAL_MANAGER]: functionalManager,
+        [FIELDS.PROJECTS]: projects,
+      });
+    }
+  }, []);
 
   console.log({
     id,
@@ -37,23 +64,37 @@ const AddEmp = ({
     direct,
     total,
     projects,
+    isEdit,
   });
 
   const handleCheckbox = (e) => {
+    console.log(e.target.dataset.label);
     setProjectsObj((prevData) => {
-      return { ...prevData, [e.target.id]: e.target.checked };
+      if (e.target.checked) {
+        return { ...prevData, [e.target.id]: e.target.dataset.label };
+      }
+      delete prevData[e.target.id];
+      return prevData;
     });
   };
 
-  console.log("projectObj", projectsObj);
+  const handleSubmit = () => {
+    const formattedProjects = Object.keys(projectsObj).map((id) => {
+      return {
+        id,
+        name: projectsObj[id],
+      };
+    });
+    onSubmit({ ...formFields, projects: formattedProjects });
+  };
 
   return (
     <div id="newfields">
       <h3>Add aide to {name}</h3>
       {/* <label htmlFor="neweid">Id :</label> */}
-      <div>
+      <div style={styles.row}>
         <Input
-          label="Id :"
+          label="Id"
           type="text"
           size="25"
           id="neweid"
@@ -66,9 +107,9 @@ const AddEmp = ({
           // onBlur={validateOnBlur(FIELDS.ID)}
         />
       </div>
-      <div>
+      <div style={styles.row}>
         <Input
-          label={"Name : "}
+          label={"Name"}
           type="text"
           size="100"
           id="newename"
@@ -76,117 +117,106 @@ const AddEmp = ({
           value={formFields[FIELDS.NAME]}
         />
       </div>
-      <div>
-        <label htmlFor="newedesig">Designation : </label>
+      {/* createChangeHandler(FIELDS.DESIGNATION) */}
+      <div style={styles.row}>
+        <label htmlFor="newedesig">Designation</label>
         <Select
+          label="Designation"
           id="newedesig"
-          onChange={createChangeHandler(FIELDS.DESIGNATION)}
-          value={formFields[FIELDS.DESIGNATION]}
+          onChange={(e) => {
+            if (e.target.value) {
+              createChangeHandler(FIELDS.DESIGNATION, {
+                id: e.target.value,
+                name: e.target[e.target.selectedIndex].dataset.label,
+              })(e);
+            } else {
+              createChangeHandler(FIELDS.DESIGNATION)(e);
+            }
+          }}
+          value={formFields[FIELDS.DESIGNATION]?.id || ""}
           options={DESIGNATIONS}
           valueKey="id"
           labelKey="label"
         />
       </div>
-      <div>
-        <label htmlFor="neweadminman">Adminitrative Manager : </label>
+      <div style={styles.row}>
+        <label htmlFor="neweadminman">Administrative Manager</label>
         <Select
+          label="Administrative Manager"
           id="neweadminman"
           options={[{ id: "FNP00179", label: "Vasanth Kamatgi" }]}
           valueKey="id"
           labelKey="label"
-          onChange={createChangeHandler(FIELDS.ADMINISTRATIVE_MANAGER)}
-          value={formFields[FIELDS.ADMINISTRATIVE_MANAGER]}
+          onChange={(e) => {
+            if (e.target.value) {
+              createChangeHandler(FIELDS.ADMINISTRATIVE_MANAGER, {
+                id: e.target.value,
+                name: e.target[e.target.selectedIndex].dataset.label,
+              })(e);
+            } else {
+              createChangeHandler(FIELDS.ADMINISTRATIVE_MANAGER)(e);
+            }
+          }}
+          value={formFields[FIELDS.ADMINISTRATIVE_MANAGER]?.id || ""}
         />
       </div>
-      <div>
-        <label htmlFor="newefuncman">Functional Manager : </label>
+      <div style={styles.row}>
+        <label htmlFor="newefuncman">Functional Manager</label>
         <Select
+          label="Functional Manager "
           id="newefuncman"
           options={[{ id: "FNP00179", label: "Vasanth Kamatgi" }]}
           valueKey="id"
           labelKey="label"
-          onChange={createChangeHandler(FIELDS.FUNCTIONAL_MANAGER)}
-          value={formFields[FIELDS.FUNCTIONAL_MANAGER]}
+          onChange={(e) => {
+            if (e.target.value) {
+              createChangeHandler(FIELDS.FUNCTIONAL_MANAGER, {
+                id: e.target.value,
+                name: e.target[e.target.selectedIndex].dataset.label,
+              })(e);
+            } else {
+              createChangeHandler(FIELDS.FUNCTIONAL_MANAGER)(e);
+            }
+          }}
+          value={formFields[FIELDS.FUNCTIONAL_MANAGER]?.id || ""}
         />
       </div>
-      <label htmlFor="neweprojects">Projects : </label>
+      <label
+        htmlFor="neweprojects"
+        style={{ textAlign: "left", marginTop: 15, marginBottom: 5 }}
+      >
+        Projects
+      </label>
       <div id="projects">
-        <div>
-          <input
-            type="checkbox"
-            id="RedRoses"
-            onChange={handleCheckbox}
-            name="neweprojects"
-          />
-          <label htmlFor="Red Roses">Red Roses</label>
-        </div>
-        <div>
-          <input
-            type="checkbox"
-            id="Kitchen"
-            name="neweprojects"
-            onChange={handleCheckbox}
-          />
-          <label htmlFor="Kitchen">Kitchen</label>
-        </div>
-        <div>
-          <input
-            type="checkbox"
-            id="Galleria"
-            name="neweprojects"
-            onChange={handleCheckbox}
-          />
-          <label htmlFor="Galleria">Galleria</label>
-        </div>
-        <div>
-          <input
-            type="checkbox"
-            id="Golliath"
-            name="neweprojects"
-            onChange={handleCheckbox}
-          />
-          <label htmlFor="Golliath">Golliath</label>
-        </div>
-
-        <div>
-          <input
-            type="checkbox"
-            id="p5"
-            name="neweprojects"
-            onChange={handleCheckbox}
-          />
-          <label htmlFor="p5">Project 5</label>
-        </div>
-        <div>
-          <input
-            type="checkbox"
-            id="p6"
-            name="neweprojects"
-            onChange={handleCheckbox}
-          />
-          <label htmlFor="p6">Project 6</label>
-        </div>
-        <div>
-          <input
-            type="checkbox"
-            id="p7"
-            name="neweprojects"
-            onChange={handleCheckbox}
-          />
-          <label htmlFor="p7">Project 7</label>
-        </div>
-        <div>
-          <input
-            type="checkbox"
-            id="p8"
-            name="neweprojects"
-            onChange={handleCheckbox}
-          />
-          <label htmlFor="p8">Project 8</label>
-        </div>
+        {PROJECTS.map((p) => {
+          return (
+            <div>
+              <input
+                type="checkbox"
+                id={p.id}
+                onChange={handleCheckbox}
+                name="neweprojects"
+                data-label={p.label}
+                checked={
+                  isEdit
+                    ? projects.find((project) => project["id"] === p.id)
+                    : null
+                }
+              />
+              <label htmlFor={p.id}>{p.label}</label>
+            </div>
+          );
+        })}
       </div>
       <div id="addnewp">
-        <input type="submit" value="Add" id="addnew" name="addnew" />
+        <button
+          id="addnew"
+          name="addnew"
+          style={styles.button}
+          onClick={handleSubmit}
+        >
+          Add
+        </button>
       </div>
     </div>
   );
