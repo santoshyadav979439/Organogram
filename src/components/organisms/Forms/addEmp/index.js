@@ -66,13 +66,15 @@ const AddEmp = ({
   };
 
   const handleSubmit = () => {
-    const formattedProjects = Object.keys(projectsObj).map((id) => {
-      return {
-        id,
-        name: projectsObj[id],
-      };
-    });
-    onSubmit({ ...formFields, projects: formattedProjects });
+    if (validateOnSubmit()) {
+      const formattedProjects = Object.keys(projectsObj).map((id) => {
+        return {
+          id,
+          name: projectsObj[id],
+        };
+      });
+      onSubmit({ ...formFields, projects: formattedProjects });
+    }
   };
 
   return (
@@ -91,7 +93,9 @@ const AddEmp = ({
           title="Please enter id in the format FNPXXXXX"
           onChange={createChangeHandler(FIELDS.ID)}
           value={formFields[FIELDS.ID]}
-          // onBlur={validateOnBlur(FIELDS.ID)}
+          error={errors[FIELDS.ID]?.error}
+          errorMessage={errors[FIELDS.ID]?.message}
+          onBlur={validateOnBlur(FIELDS.ID)}
         />
       </div>
       <div style={styles.row}>
@@ -102,6 +106,9 @@ const AddEmp = ({
           id="newename"
           onChange={createChangeHandler(FIELDS.NAME)}
           value={formFields[FIELDS.NAME]}
+          error={errors[FIELDS.NAME]?.error}
+          errorMessage={errors[FIELDS.NAME]?.message}
+          onBlur={validateOnBlur(FIELDS.ID)}
         />
       </div>
       {/* createChangeHandler(FIELDS.DESIGNATION) */}
@@ -124,6 +131,8 @@ const AddEmp = ({
           options={DESIGNATIONS}
           valueKey="id"
           labelKey="label"
+          error={errors[FIELDS.DESIGNATION]?.error}
+          errorMessage={errors[FIELDS.DESIGNATION]?.message}
         />
       </div>
       <div style={styles.row}>
@@ -145,6 +154,8 @@ const AddEmp = ({
             }
           }}
           value={formFields[FIELDS.ADMINISTRATIVE_MANAGER]?.id || ""}
+          error={errors[FIELDS.ADMINISTRATIVE_MANAGER]?.error}
+          errorMessage={errors[FIELDS.ADMINISTRATIVE_MANAGER]?.message}
         />
       </div>
       <div style={styles.row}>
@@ -166,6 +177,8 @@ const AddEmp = ({
             }
           }}
           value={formFields[FIELDS.FUNCTIONAL_MANAGER]?.id || ""}
+          error={errors[FIELDS.FUNCTIONAL_MANAGER]?.error}
+          errorMessage={errors[FIELDS.FUNCTIONAL_MANAGER]?.message}
         />
       </div>
       <label

@@ -28,8 +28,4 @@ export const VALIDATION_SCHEMA = {
     isRequired: true,
     message: "Required Field",
   },
-  [FIELDS.PROJECTS]: {
-    isRequired: true,
-    message: "Required Field",
-  },
 };

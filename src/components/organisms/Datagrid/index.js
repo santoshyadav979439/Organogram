@@ -16,7 +16,6 @@ const DataGrid = () => {
     console.log("role is::", role);
     axios.get("getHiearachy/" + role).then((res) => {
       let data = res.data;
-      console.log(data);
       const { detail } = data;
       dispatch(add(detail));
     });

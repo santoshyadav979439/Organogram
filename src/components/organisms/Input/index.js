@@ -1,14 +1,27 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const Input = ({ error, label, id, ...props }) => {
+const Input = ({ error, errorMessage, label, id, ...props }) => {
   return (
     <>
       <label htmlFor={id} style={{ marginRight: 10 }}>
         {label}
       </label>
-      <input error={error} label={label} id={id} {...props} />
-      {error && <p>{error}</p>}
+      <span>
+        <input error={error} label={label} id={id} {...props} />
+        {error && (
+          <p
+            style={{
+              fontSize: 12,
+              color: "red",
+              marginTop: 5,
+              marginBottom: 5,
+            }}
+          >
+            {errorMessage}
+          </p>
+        )}
+      </span>
     </>
   );
 };
