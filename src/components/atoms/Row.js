@@ -1,10 +1,10 @@
-import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { open, close } from "../../slices/popup/popupSlice";
-import { AddEmp } from "../organisms/Forms";
-import BasicModal from "../molecules/Modal";
-import { modify, add, deleteEmp } from "../../slices/employee/employeeSlice";
-import axios from "../../axios";
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { open, close } from '../../slices/popup/popupSlice';
+import { AddEmp } from '../organisms/Forms';
+import BasicModal from '../molecules/Modal';
+import { modify, add, deleteEmp } from '../../slices/employee/employeeSlice';
+import axios from '../../axios';
 
 const Row = ({
   id,
@@ -18,7 +18,7 @@ const Row = ({
   projects,
   rowClickHandler,
 }) => {
-  console.log("projects", projects);
+  console.log('projects', projects);
   const [isExpanded, setIsExpended] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
   const dispatch = useDispatch();
@@ -26,26 +26,29 @@ const Row = ({
   const employee = useSelector((state) => state.employeeSlice.empData);
 
   const onClickHandler = () => {
-    setIsExpended(!isExpanded);
-    rowClickHandler(id);
+    const extended = !isExpanded;
+
+    setIsExpended(extended);
+
+    rowClickHandler(id, extended);
   };
   return (
     <>
       <tr
         id={id}
-        className={isExpanded ? "l1 expanded" : "l1"}
+        className={isExpanded ? 'l1 expanded' : 'l1'}
         onClick={onClickHandler}
       >
-        <td className="etree">
-          <span className="node">
-            <span className="expcoll"></span>
+        <td className='etree'>
+          <span className='node'>
+            <span className='expcoll'></span>
             {name}
           </span>
 
           <div
-            className="axns"
+            className='axns'
             style={
-              !modify ? { visibility: "hidden" } : { visibility: "visible" }
+              !modify ? { visibility: 'hidden' } : { visibility: 'visible' }
             }
           >
             <button
@@ -53,32 +56,32 @@ const Row = ({
                 setIsEdit(true);
                 dispatch(open());
               }}
-              className="axn edite"
+              className='axn edite'
             >
               ✎
             </button>
-            <button className="axn movee">✥</button>
-            <button className="axn deletee">🗑</button>
+            <button className='axn movee'>✥</button>
+            <button className='axn deletee'>🗑</button>
             <button
               onClick={() => {
                 setIsEdit(false);
                 dispatch(open());
               }}
-              className="axn addso"
+              className='axn addso'
             >
               +
             </button>
           </div>
         </td>
-        <td className="eid">{id}</td>
-        <td className="ename">{name}</td>
-        <td className="edesig">{designation.name}</td>
-        <td className="elevel">{level}</td>
-        <td className="eadminman">{adminManager.name}</td>
-        <td className="efuncman">{functionalManager.name}</td>
-        <td className="edreports">{direct}</td>
-        <td className="etreports">{total}</td>
-        <td className="eprojects">{projects.map((el) => el.name).join(",")}</td>
+        <td className='eid'>{id}</td>
+        <td className='ename'>{name}</td>
+        <td className='edesig'>{designation.name}</td>
+        <td className='elevel'>{level}</td>
+        <td className='eadminman'>{adminManager.name}</td>
+        <td className='efuncman'>{functionalManager.name}</td>
+        <td className='edreports'>{direct}</td>
+        <td className='etreports'>{total}</td>
+        <td className='eprojects'>{projects.map((el) => el.name).join(',')}</td>
       </tr>
       <BasicModal>
         <AddEmp
@@ -94,12 +97,12 @@ const Row = ({
           projects={projects}
           onSubmit={(data) => {
             if (isEdit) {
-              axios.put("empOperation", data).then((res) => {
+              axios.put('empOperation', data).then((res) => {
                 let data = res.data;
                 dispatch(close());
               });
             } else {
-              axios.post("empOperation", data).then((res) => {
+              axios.post('empOperation', data).then((res) => {
                 let data = res.data;
                 dispatch(close());
               });

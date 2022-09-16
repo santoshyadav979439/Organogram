@@ -4,7 +4,12 @@ import axios from '../../axios';
 const RowList = (props) => {
   const [isRowClicked, setIsRowClicked] = useState(false);
   const [hierarchy, setHierarchy] = useState([]);
-  const rowClickHandler = (id) => {
+  const rowClickHandler = (id, isExpanded) => {
+    console.log(isExpanded)
+    if (!isExpanded) {
+      setIsRowClicked(false);
+      return;
+    }
     setIsRowClicked(true);
     const currentEmpId = id.split('-');
     axios
@@ -14,14 +19,16 @@ const RowList = (props) => {
         console.log('child data', childData);
         const data = [<Row {...props} rowClickHandler={rowClickHandler} />];
         const newData = data.concat(
-          childData.map((el) => (
-            <Row
-              key={el.id}
-              {...el}
-              id={`${el.id}`}
-              rowClickHandler={rowClickHandler}
-            />
-          ))
+          childData != null
+            ? childData.map((el) => (
+                <Row
+                  key={el.id}
+                  {...el}
+                  id={`${el.id}`}
+                  rowClickHandler={rowClickHandler}
+                />
+              ))
+            : []
         );
         console.log(newData);
         console.log('row clicked', isRowClicked);
