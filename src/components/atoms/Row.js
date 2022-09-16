@@ -18,6 +18,7 @@ const Row = ({
   projects,
   rowClickHandler,
 }) => {
+  console.log("projects", projects);
   const [isExpanded, setIsExpended] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
   const dispatch = useDispatch();
@@ -77,7 +78,7 @@ const Row = ({
         <td className="efuncman">{functionalManager.name}</td>
         <td className="edreports">{direct}</td>
         <td className="etreports">{total}</td>
-        <td className="eprojects">All</td>
+        <td className="eprojects">{projects.map((el) => el.name).join(",")}</td>
       </tr>
       <BasicModal>
         <AddEmp

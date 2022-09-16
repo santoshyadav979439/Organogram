@@ -1,26 +1,30 @@
-import React, { useState } from "react";
-import Row from "../atoms/Row";
-import axios from "../../axios";
+import React, { useState } from 'react';
+import Row from '../atoms/Row';
+import axios from '../../axios';
 const RowList = (props) => {
   const [isRowClicked, setIsRowClicked] = useState(false);
   const [hierarchy, setHierarchy] = useState([]);
   const rowClickHandler = (id) => {
-    // setIsRowClicked(true);
-    const currentEmpId = id.split("-");
+    setIsRowClicked(true);
+    const currentEmpId = id.split('-');
     axios
-      .get("admin/" + currentEmpId[currentEmpId.length - 1])
+      .get('getHiearachy/admin/' + currentEmpId[currentEmpId.length - 1])
       .then((res) => {
-        const childData = res.data.detail;
+        const childData = res.data.detail[0].hierarchy;
+        console.log('child data', childData);
         const data = [<Row {...props} rowClickHandler={rowClickHandler} />];
         const newData = data.concat(
           childData.map((el) => (
             <Row
+              key={el.id}
               {...el}
-              id={`${id}-${el.id}`}
+              id={`${el.id}`}
               rowClickHandler={rowClickHandler}
             />
           ))
         );
+        console.log(newData);
+        console.log('row clicked', isRowClicked);
         setHierarchy(newData);
       })
       .catch((err) => console.log(err));
