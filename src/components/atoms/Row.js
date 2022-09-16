@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { open } from "../../slices/popup/popupSlice";
+import { open, close } from "../../slices/popup/popupSlice";
 import { AddEmp } from "../organisms/Forms";
 import BasicModal from "../molecules/Modal";
 import { modify, add, deleteEmp } from "../../slices/employee/employeeSlice";
@@ -95,12 +95,12 @@ const Row = ({
             if (isEdit) {
               axios.put("empOperation", data).then((res) => {
                 let data = res.data;
-                console.log(data);
+                dispatch(close());
               });
             } else {
               axios.post("empOperation", data).then((res) => {
                 let data = res.data;
-                console.log(data);
+                dispatch(close());
               });
             }
           }}

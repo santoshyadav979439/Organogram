@@ -5,6 +5,7 @@ export const FIELDS = {
   ADMINISTRATIVE_MANAGER: "adminManager",
   FUNCTIONAL_MANAGER: "functionalManager",
   PROJECTS: "project",
+  LEVEL: "level",
 };
 
 export const VALIDATION_SCHEMA = {
@@ -25,6 +26,10 @@ export const VALIDATION_SCHEMA = {
     message: "Required Field",
   },
   [FIELDS.FUNCTIONAL_MANAGER]: {
+    isRequired: true,
+    message: "Required Field",
+  },
+  [FIELDS.LEVEL]: {
     isRequired: true,
     message: "Required Field",
   },
