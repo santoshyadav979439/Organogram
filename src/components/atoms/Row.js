@@ -45,11 +45,14 @@ const Row = ({
           <div
             className="axns"
             style={
-              !modify ? { visibility: "hidden" } : { visibility: "visible" }
+              !modify
+                ? { visibility: "hidden", zIndex: 9999 }
+                : { visibility: "visible", zIndex: 9999 }
             }
           >
             <button
-              onClick={() => {
+              onClick={(e) => {
+                e.stopPropagation();
                 setIsEdit(true);
                 dispatch(open());
               }}
@@ -58,9 +61,39 @@ const Row = ({
               ✎
             </button>
             <button className="axn movee">✥</button>
-            <button className="axn deletee">🗑</button>
             <button
-              onClick={() => {
+              className="axn deletee"
+              onClick={(e) => {
+                e.stopPropagation();
+                const userResponse = confirm(
+                  "Are you sure you want to delete."
+                );
+                if (userResponse) {
+                  axios
+                    .delete("empOperation", {
+                      data: {
+                        id,
+                        name,
+                        designation,
+                        level,
+                        adminManager,
+                        functionalManager,
+                        projects,
+                      },
+                    })
+                    .then((res) => {
+                      let data = res.data;
+                      dispatch(close());
+                      window.location.reload();
+                    });
+                }
+              }}
+            >
+              🗑
+            </button>
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
                 setIsEdit(false);
                 dispatch(open());
               }}
@@ -95,13 +128,19 @@ const Row = ({
           onSubmit={(data) => {
             if (isEdit) {
               axios.put("empOperation", data).then((res) => {
-                let data = res.data;
+                let resData = res.data;
                 dispatch(close());
+                console.log("resData", resData);
+                rowClickHandler(resData.id);
+                // window.location.reload();
               });
             } else {
               axios.post("empOperation", data).then((res) => {
-                let data = res.data;
+                let resData = res.data;
                 dispatch(close());
+                rowClickHandler(resData.id);
+                console.log("resData", resData);
+                // window.location.reload();
               });
             }
           }}

@@ -56,17 +56,25 @@ const AddEmp = ({
           ? functionalManager
           : null,
         [FIELDS.PROJECTS]: projects,
+        [FIELDS.LEVEL]: level,
       });
     }
+    const obj = {};
+    projects.forEach((p) => {
+      obj[p.id] = p.name;
+    });
+    setProjectsObj(obj);
 
-    axios
-      .get("getAddPrefil")
-      .then((res) => {
-        dispatch(update(res.data));
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    if (dropdownsData?.designation?.length === 0) {
+      axios
+        .get("getAddPrefil")
+        .then((res) => {
+          dispatch(update(res.data));
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   }, []);
 
   const handleCheckbox = (e) => {
@@ -242,7 +250,7 @@ const AddEmp = ({
           style={styles.button}
           onClick={handleSubmit}
         >
-          Add
+          {isEdit ? "Save" : "Add"}
         </button>
       </div>
     </div>

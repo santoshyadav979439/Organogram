@@ -4,7 +4,7 @@ export const FIELDS = {
   DESIGNATION: "designation",
   ADMINISTRATIVE_MANAGER: "adminManager",
   FUNCTIONAL_MANAGER: "functionalManager",
-  PROJECTS: "project",
+  PROJECTS: "projects",
   LEVEL: "level",
 };
 
