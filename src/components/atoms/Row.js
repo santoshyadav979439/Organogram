@@ -6,18 +6,20 @@ import BasicModal from "../molecules/Modal";
 import { modify, add, deleteEmp } from "../../slices/employee/employeeSlice";
 import axios from "../../axios";
 
-const Row = ({
-  id,
-  name,
-  designation,
-  level,
-  adminManager,
-  functionalManager,
-  direct,
-  total,
-  projects,
-  rowClickHandler,
-}) => {
+const Row = (props) => {
+  const {
+    id,
+    name,
+    designation,
+    level,
+    adminManager,
+    functionalManager,
+    direct,
+    total,
+    projects,
+    hierarchy,
+    rowClickHandler,
+  } = props;
   console.log("projects", projects);
   const [isExpanded, setIsExpended] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
@@ -26,8 +28,11 @@ const Row = ({
   const employee = useSelector((state) => state.employeeSlice.empData);
 
   const onClickHandler = () => {
-    setIsExpended(!isExpanded);
-    rowClickHandler(id);
+    const extended = !isExpanded;
+
+    setIsExpended(extended);
+
+    rowClickHandler(id, extended, hierarchy);
   };
   return (
     <>
